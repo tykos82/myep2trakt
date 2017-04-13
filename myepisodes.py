@@ -62,7 +62,14 @@ class MyEpisodes(object):
         mylist_tr = mylist.findAll("tr")[1:-1]
         for row in mylist_tr:
             link = row.find('a', {'href': True})
-            showid = urlparse.parse_qs(link.get('href'))['showid'][0]
+            #INIZIO MODIFICA
+            print link
+            if type(link) is str: print "ok"
+            #stringa = link.split("/")
+            stringa = re.search("/epsbyshow/", link)
+            print stringa.group(1)
+            #FINE MODIFICA
+            #showid = urlparse.parse_qs(link.get('href'))['showid'][0]
             self.shows.append(int(showid))
             self.show_list.append({'id': int(showid), 'name': link.string})
         return True
